@@ -72,7 +72,16 @@ namespace EvickaWPF
             object selectedRow = bandListView.SelectedItem;
             Band band = (Band)selectedRow;
 
-            this.NavigationService.Navigate(new BandDetail(band));
+            if(band == null)
+            {
+                MessageBox.Show("Nevybral jsi kapelu na detial");
+                this.NavigationService.Navigate(new BandsAdmin());
+            }
+            else
+            {
+                this.NavigationService.Navigate(new BandDetail(band));
+            }
+
         }
 
         /// <summary>

@@ -32,11 +32,6 @@ namespace EvickaWPF
             bandDetail = (Band) band;
         }
 
-        private void bandDetLoad(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("value from prev.page is " + bandDetail.name);
-        }
-
         private void ListView_Loaded(object sender, RoutedEventArgs e)
         {
             try
