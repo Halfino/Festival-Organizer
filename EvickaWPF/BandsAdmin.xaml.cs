@@ -93,22 +93,27 @@ namespace EvickaWPF
         {
             object selectedRow = bandListView.SelectedItem;
             Band band = (Band)selectedRow;
-            try
+            if(band != null)
             {
-                using (var db = new LiteDatabase(@"EvaDB.db"))
+                try
                 {
-                    var bands = db.GetCollection<Band>("Bands");
-                    bands.Delete(band._id);
+                    using (var db = new LiteDatabase(@"EvaDB.db"))
+                    {
+                        var bands = db.GetCollection<Band>("Bands");
+                        bands.Delete(band._id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                System.Windows.MessageBox.Show(ex.Message);
+                MessageBox.Show("Nevybral jsi kapelu ke smazani");
             }
-            finally
-            {
-                this.NavigationService.Navigate(new BandsAdmin());
-            }
+
+            this.NavigationService.Navigate(new BandsAdmin());
         }
     
     }
