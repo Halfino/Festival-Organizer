@@ -36,7 +36,6 @@ namespace EvickaWPF
             band.banzone = bandzone.Text.Contains("banzone".ToUpper()) ? bandzone.Text : "Kapela nemá Bandzone";
             band.website = website.Text.Contains("www.") ? website.Text : "Kapela nemá webovou stránku";
             band.personalNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
-            band.members = new TextRange(bandMembers.Document.ContentStart, bandMembers.Document.ContentEnd).Text;
 
             band.saveBandToDb(band);
 

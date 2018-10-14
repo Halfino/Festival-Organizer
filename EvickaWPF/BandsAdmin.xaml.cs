@@ -156,8 +156,8 @@ namespace EvickaWPF
             PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
-            //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
-            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1, 1 });
+            //set number of table columns and their width relative to each other (that works weird, changing values has no affection)
+            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1});
             //table width related to page
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
@@ -172,7 +172,7 @@ namespace EvickaWPF
                 foreach (var band in sortedBands)
                 {
                     Band bandToProcess = (Band)band;
-                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", band.name, band.city, band.style, band.facebook, band.banzone, band.website, band.members, band.description);
+                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", band.name, band.city, band.style, band.facebook, band.banzone, band.website, band.description);
                     lines.Add(line);
                 }
             }
@@ -243,8 +243,8 @@ namespace EvickaWPF
                     bandListView.ItemsSource = allBandList;
                 }
 
-                }
             }
+        }
 
         private void pdfExportSearchedClick(object sender, RoutedEventArgs e)
         {
@@ -257,7 +257,7 @@ namespace EvickaWPF
             PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
             //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
-            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1, 1 });
+            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1 });
             //table width related to page
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
@@ -273,14 +273,13 @@ namespace EvickaWPF
                 foreach (var band in queryBands)
                 {
                     Band bandToProcess = (Band)band;
-                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}",
                         bandToProcess.name,
                         bandToProcess.city,
                         bandToProcess.style,
                         bandToProcess.facebook,
                         bandToProcess.banzone,
                         bandToProcess.website,
-                        bandToProcess.members,
                         bandToProcess.description);
                     lines.Add(line);
                 }

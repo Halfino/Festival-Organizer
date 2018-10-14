@@ -67,14 +67,12 @@ namespace EvickaWPF
             try
             {
                 string personalBandNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
-                string updateMembers = new TextRange(bandMembers.Document.ContentStart, bandMembers.Document.ContentEnd).Text;
                 string description = new TextRange(bandDescription.Document.ContentStart, bandDescription.Document.ContentEnd).Text;
                 bandDetail.name = bandName.Text;
                 bandDetail.city = bandCity.Text;
                 bandDetail.banzone = bandBandzone.Text;
                 bandDetail.description = description;
                 bandDetail.facebook = bandFacebook.Text;
-                bandDetail.members = updateMembers;
                 bandDetail.style = bandStyle.Text;
                 bandDetail.website = bandWeb.Text;
                 bandDetail.personalNote = personalBandNote;
@@ -100,8 +98,6 @@ namespace EvickaWPF
             bandName.Text = bandDetail.name;
             bandCity.Text = bandDetail.city;
             bandStyle.Text = bandDetail.style;
-            bandMembers.Document.Blocks.Clear();
-            bandMembers.Document.Blocks.Add(new Paragraph(new Run(bandDetail.members)));
             bandDescription.Document.Blocks.Clear();
             bandDescription.Document.Blocks.Add(new Paragraph(new Run(bandDetail.description)));
             bandFacebook.Text = (bandDetail.facebook != null) ? bandDetail.facebook : "Kapela nemá Facebook" ;

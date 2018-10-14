@@ -36,13 +36,6 @@
         <TextBox x:Name="bandFacebook" HorizontalAlignment="Left" Height="23" Margin="63,384,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
         <TextBox x:Name="bandBandzone" HorizontalAlignment="Left" Height="23" Margin="63,419,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
         <TextBox x:Name="bandWeb" HorizontalAlignment="Left" Height="23" Margin="63,461,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
-        <RichTextBox x:Name="bandMembers" HorizontalAlignment="Left" Height="106" Margin="63,508,0,0" VerticalAlignment="Top" Width="217">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="Složení"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
         <RichTextBox x:Name="personalNote" HorizontalAlignment="Left" Height="159" Margin="364,447,0,0" VerticalAlignment="Top" Width="496" Loaded="noteLoaded">
             <FlowDocument>
                 <Paragraph>
