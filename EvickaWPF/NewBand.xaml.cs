@@ -32,9 +32,9 @@ namespace EvickaWPF
             band.city = newBandCity.Text;
             band.style = newBandStyle.Text;
             band.description = new TextRange(bandDescription.Document.ContentStart, bandDescription.Document.ContentEnd).Text;
-            band.facebook = facebook.Text;
-            band.banzone = bandzone.Text;
-            band.website = website.Text;
+            band.facebook = facebook.Text.Contains("facebook".ToUpper()) ? facebook.Text : "Kapela nemá Facebook" ;
+            band.banzone = bandzone.Text.Contains("banzone".ToUpper()) ? bandzone.Text : "Kapela nemá Bandzone";
+            band.website = website.Text.Contains("www.") ? website.Text : "Kapela nemá webovou stránku";
             band.personalNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
             band.members = new TextRange(bandMembers.Document.ContentStart, bandMembers.Document.ContentEnd).Text;
 

@@ -74,7 +74,7 @@ namespace EvickaWPF
         private void newBand(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new NewBand());
-            
+
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace EvickaWPF
             object selectedRow = bandListView.SelectedItem;
             Band band = (Band)selectedRow;
 
-            if(band == null)
+            if (band == null)
             {
                 MessageBox.Show("Není vybrána kapela!");
                 this.NavigationService.Navigate(new BandsAdmin());
@@ -108,7 +108,7 @@ namespace EvickaWPF
         {
             object selectedRow = bandListView.SelectedItem;
             Band band = (Band)selectedRow;
-            if(band != null)
+            if (band != null)
             {
                 try
                 {
@@ -176,7 +176,7 @@ namespace EvickaWPF
                     lines.Add(line);
                 }
             }
-            string headerLine = "Jméno, Město, Žánr, Facebook, Bandzone, Website, Složení, Popis";
+            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Složení, Popis";
             //process headerLine
             process(table, headerLine, bold, true);
             //process data rows into table
@@ -213,6 +213,38 @@ namespace EvickaWPF
 
             }
         }
+
+
+        private void textChanged(object sender, TextChangedEventArgs e)
+        {
+            string searching = searchBox.Text.ToUpper();
+            using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
+            {
+                var bands = db.GetCollection<Band>("Bands");
+                var queryBands = bands.FindAll();
+                if (searching != null)
+                {
+                    List<Band> findBands = new List<Band>();
+                    foreach (Band theBand in queryBands)
+                    {
+                        if (theBand.name.ToUpper().Contains(searching))
+                        {
+                            findBands.Add(theBand);
+                        }
+                    }
+                    var bandList = findBands.OrderBy(x => x.name);
+                    bandListView.ItemsSource = bandList;
+                }
+
+                else
+                {
+
+                    var allBandList = queryBands.OrderBy(x => x.name).ToList();
+                    bandListView.ItemsSource = allBandList;
+                }
+
+                }
+            }
+        }
+
     }
-    
-}
