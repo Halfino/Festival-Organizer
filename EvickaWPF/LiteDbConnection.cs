@@ -13,7 +13,9 @@ namespace EvickaWPF
      
         public static string getDbName()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             string dbName = @"" + ConfigurationSettings.AppSettings["DATABASE"];
+#pragma warning restore CS0618 // Type or member is obsolete
             return dbName;
         }
 

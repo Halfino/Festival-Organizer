@@ -153,8 +153,8 @@ namespace EvickaWPF
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
-            PdfFont font = PdfFontFactory.CreateFont(FontConstants.HELVETICA);
-            PdfFont bold = PdfFontFactory.CreateFont(FontConstants.HELVETICA_BOLD);
+            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
             //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
             Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1, 1 });
@@ -253,8 +253,8 @@ namespace EvickaWPF
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
-            PdfFont font = PdfFontFactory.CreateFont(FontConstants.HELVETICA);
-            PdfFont bold = PdfFontFactory.CreateFont(FontConstants.HELVETICA_BOLD);
+            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
             //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
             Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1, 1 });
