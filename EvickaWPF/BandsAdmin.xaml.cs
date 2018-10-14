@@ -176,7 +176,7 @@ namespace EvickaWPF
                     lines.Add(line);
                 }
             }
-            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Složení, Popis";
+            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Popis";
             //process headerLine
             process(table, headerLine, bold, true);
             //process data rows into table
@@ -284,7 +284,7 @@ namespace EvickaWPF
                     lines.Add(line);
                 }
             }
-            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Složení, Popis";
+            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Popis";
             //process headerLine
             process(table, headerLine, bold, true);
             //process data rows into table
