@@ -8,7 +8,7 @@
       d:DesignHeight="768" d:DesignWidth="1024"
       Title="BandDetail">
 
-    <Grid Background="White">
+    <Grid Background="White" Loaded="detailPageLoaded">
         <ListView x:Name="contactListView" HorizontalAlignment="Left" Height="248" Margin="508,118,0,0" VerticalAlignment="Top" Width="496" Loaded="ListView_Loaded">
             <ListView.View>
                 <GridView>
@@ -32,5 +32,25 @@
         </RichTextBox>
         <Label Content="Poznamka" HorizontalAlignment="Left" Margin="513,413,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <Button x:Name="updateBandButton" HorizontalAlignment="Left" Margin="578,638,0,0" VerticalAlignment="Top" Width="167" Height="41" Click="saveBandButtonClick" Content="save"/>
+        <TextBox x:Name="bandName" HorizontalAlignment="Left" Height="23" Margin="63,118,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="bandCity" HorizontalAlignment="Left" Height="23" Margin="63,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="bandStyle" HorizontalAlignment="Left" Height="23" Margin="63,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="bandFacebook" HorizontalAlignment="Left" Height="23" Margin="63,384,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
+        <RichTextBox x:Name="bandDescription" HorizontalAlignment="Left" Height="106" Margin="63,260,0,0" VerticalAlignment="Top" Width="217">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Popis"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <TextBox x:Name="bandBandzone" HorizontalAlignment="Left" Height="23" Margin="63,419,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="bandWeb" HorizontalAlignment="Left" Height="23" Margin="63,461,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
+        <RichTextBox x:Name="bandMembers" HorizontalAlignment="Left" Height="106" Margin="63,508,0,0" VerticalAlignment="Top" Width="217">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Popis"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
     </Grid>
 </Page>

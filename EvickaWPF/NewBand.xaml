@@ -38,6 +38,13 @@
             </FlowDocument>
         </RichTextBox>
         <Label Content="Nova kapela" Margin="500,29,0,0" VerticalAlignment="Top" Width="115" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18"/>
+        <RichTextBox x:Name="bandMembers" HorizontalAlignment="Left" Height="106" Margin="419,205,0,0" VerticalAlignment="Top" Width="217">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Slozeni"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
 
     </Grid>

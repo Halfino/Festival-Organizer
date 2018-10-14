@@ -15,6 +15,7 @@ namespace EvickaWPF
         public string city { get; set; }
         public string style { get; set; }
         public string description { get; set; }
+        public string members { get; set; }
         public string facebook { get; set; }
         public string banzone { get; set; }
         public string website { get; set; }

@@ -23,7 +23,8 @@ namespace EvickaWPF
         public mainPage()
         {
             InitializeComponent();
-            String whatIsDone = "Hotovo: vytvoreni kapely, Smazani kapely, poslani kapely do dalsiho okna." + Environment.NewLine + "Potreba udelat: kontakty na kapele, detail kapely s upravou, potvrzeni na mazani kapely";
+            String whatIsDone = "Hotovo: vytvoreni kapely, Smazani kapely, editace kapely, potvrzeni ke smazani." + 
+                Environment.NewLine + "Potreba udelat: Pridani, editace a mazani vice kontaktu na kapele. Zatim se da pouze pridat jeden kontakt bez moznosti editace";
             MessageBox.Show(whatIsDone, "TODO");
         }
 

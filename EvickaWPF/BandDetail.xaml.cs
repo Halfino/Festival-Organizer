@@ -67,7 +67,16 @@ namespace EvickaWPF
             try
             {
                 string personalBandNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
-                bandDetail.name = "tak to zkusime";
+                string updateMembers = new TextRange(bandMembers.Document.ContentStart, bandMembers.Document.ContentEnd).Text;
+                string description = new TextRange(bandDescription.Document.ContentStart, bandDescription.Document.ContentEnd).Text;
+                bandDetail.name = bandName.Text;
+                bandDetail.city = bandCity.Text;
+                bandDetail.banzone = bandBandzone.Text;
+                bandDetail.description = description;
+                bandDetail.facebook = bandFacebook.Text;
+                bandDetail.members = updateMembers;
+                bandDetail.style = bandStyle.Text;
+                bandDetail.website = bandWeb.Text;
                 bandDetail.personalNote = personalBandNote;
                 bandDetail.saveBandToDb(bandDetail);
                 this.NavigationService.Navigate(new BandDetail(bandDetail));                
@@ -83,6 +92,21 @@ namespace EvickaWPF
         {
             personalNote.Document.Blocks.Clear();
             personalNote.Document.Blocks.Add(new Paragraph(new Run(bandDetail.personalNote)));
+        }
+
+        private void detailPageLoaded(object sender, RoutedEventArgs e)
+        {
+            detailHeader.Content = "Detail kapely " + bandDetail.name;
+            bandName.Text = bandDetail.name;
+            bandCity.Text = bandDetail.city;
+            bandStyle.Text = bandDetail.style;
+            bandMembers.Document.Blocks.Clear();
+            bandMembers.Document.Blocks.Add(new Paragraph(new Run(bandDetail.members)));
+            bandDescription.Document.Blocks.Clear();
+            bandDescription.Document.Blocks.Add(new Paragraph(new Run(bandDetail.description)));
+            bandFacebook.Text = bandDetail.facebook;
+            bandBandzone.Text = (bandDetail.banzone != null) ? bandDetail.banzone : "Kapela nema Bandzone";
+            bandWeb.Text = (bandDetail.website != null) ? bandDetail.website : "Kapela nema webovou stranku";
         }
     }
 }

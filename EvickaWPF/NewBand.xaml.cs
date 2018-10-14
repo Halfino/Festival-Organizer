@@ -36,6 +36,7 @@ namespace EvickaWPF
             band.banzone = bandzone.Text;
             band.website = website.Text;
             band.personalNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
+            band.members = new TextRange(bandMembers.Document.ContentStart, bandMembers.Document.ContentEnd).Text;
 
             band.saveBandToDb(band);
 
@@ -52,7 +53,6 @@ namespace EvickaWPF
                 contact.saveContactToDb(contact);
             }
 
-            MessageBox.Show("Kapela byla vlozena s id = " + band._id);
             this.NavigationService.Navigate(new BandsAdmin());
         }
 

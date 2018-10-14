@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Collections;
+using System.Drawing;
 using LiteDB;
 
 namespace EvickaWPF
@@ -100,7 +103,12 @@ namespace EvickaWPF
                     using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
                     {
                         var bands = db.GetCollection<Band>("Bands");
-                        bands.Delete(band._id);
+                        MessageBoxResult myResult;
+                        myResult = MessageBox.Show("Opravdu chcete smazat kapelu " + band.name + " ?", "Delete Confirmation", MessageBoxButton.OKCancel);
+                        if (myResult == MessageBoxResult.OK)
+                        {
+                            bands.Delete(band._id);
+                        }
                     }
                 }
                 catch (Exception ex)
