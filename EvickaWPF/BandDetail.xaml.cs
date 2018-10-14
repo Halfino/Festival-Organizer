@@ -51,5 +51,38 @@ namespace EvickaWPF
                 System.Windows.MessageBox.Show(ex.Message);
             }
         }
+
+        private void backButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new BandsAdmin());
+        }
+
+        private void detailLoaded(object sender, RoutedEventArgs e)
+        {
+            detailHeader.Content = "Detail kapely " + bandDetail.name;
+        }
+
+        private void saveBandButtonClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                    string personalBandNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
+                    bandDetail.name = "tak to zkusime";
+                    bandDetail.personalNote = personalBandNote;
+                    bandDetail.saveBandToDb(bandDetail);
+                    this.NavigationService.Navigate(new BandDetail(bandDetail));                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.NavigationService.Navigate(new BandsAdmin());
+            }
+        }
+
+        private void noteLoaded(object sender, RoutedEventArgs e)
+        {
+            personalNote.Document.Blocks.Clear();
+            personalNote.Document.Blocks.Add(new Paragraph(new Run(bandDetail.personalNote)));
+        }
     }
 }

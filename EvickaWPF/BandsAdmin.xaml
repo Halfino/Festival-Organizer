@@ -5,22 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EvickaWPF"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="768" d:DesignWidth="1024"
       Title="BandsAdmin">
 
     <Grid Background="White">
-        <ListView x:Name="bandListView" HorizontalAlignment="Left" Height="381.007" Margin="82.38,35.011,0,0" VerticalAlignment="Top" Width="300.000" Initialized="bandListInitialize">
+        <ListView x:Name="bandListView" HorizontalAlignment="Left" Height="591" Margin="82,35,0,0" VerticalAlignment="Top" Width="363" Initialized="bandListInitialize">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}" Width="130"/>
-                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding city}" Width="70"/>
-                    <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding style}" Width="90"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}" Width="160"/>
+                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding city}" Width="80"/>
+                    <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding style}" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="newBandButton" Content="Nova kapela" HorizontalAlignment="Left" Height="26.774" Margin="450,77.231,0,0" VerticalAlignment="Top" Width="192.563" Click="newBand"/>
-        <Button x:Name="editBandButton" Content="Zobrazit detail a upravit" HorizontalAlignment="Left" Height="26.773" Margin="450,128.719,0,0" VerticalAlignment="Top" Width="192.563" Click="editBandButton_Click"/>
-        <Button x:Name="deleteBandButton" Content="Smazat kapelu" HorizontalAlignment="Left" Height="26.774" Margin="450,183.295,0,0" VerticalAlignment="Top" Width="192.563" Click="deleteBandButton_Click"/>
+        <Button x:Name="newBandButton" Content="Nova kapela" HorizontalAlignment="Left" Height="27" Margin="652,52,0,0" VerticalAlignment="Top" Width="192" Click="newBand"/>
+        <Button x:Name="editBandButton" Content="Zobrazit detail a upravit" HorizontalAlignment="Left" Height="26" Margin="652,114,0,0" VerticalAlignment="Top" Width="193" Click="editBandButton_Click"/>
+        <Button x:Name="deleteBandButton" Content="Smazat kapelu" HorizontalAlignment="Left" Height="27" Margin="652,185,0,0" VerticalAlignment="Top" Width="193" Click="deleteBandButton_Click"/>
+        <Button x:Name="ExitButton" Content="Konec Programu" HorizontalAlignment="Left" Margin="652,471,0,0" VerticalAlignment="Top" Width="192" Height="38" Click="exitButtonClick"/>
 
     </Grid>
 </Page>

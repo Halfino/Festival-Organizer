@@ -115,7 +115,11 @@ namespace EvickaWPF
 
             this.NavigationService.Navigate(new BandsAdmin());
         }
-    
+
+        private void exitButtonClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
     
 }

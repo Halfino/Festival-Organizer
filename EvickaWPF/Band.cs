@@ -17,7 +17,7 @@ namespace EvickaWPF
         public string facebook { get; set; }
         public string banzone { get; set; }
         public string website { get; set; }
-
+        public string personalNote { get; set; }
 
 
 
@@ -32,7 +32,7 @@ namespace EvickaWPF
                 using (var db = new LiteDatabase(@"EvaDB.db"))
                 {
                     var bands = db.GetCollection<Band>("Bands");
-                    bands.Insert(band);
+                    bands.Upsert(band);
                 }
             }
             catch(Exception ex)

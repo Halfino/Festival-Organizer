@@ -5,20 +5,32 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EvickaWPF"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="768" d:DesignWidth="1024"
       Title="BandDetail">
 
     <Grid Background="White">
-        <ListView x:Name="contactListView" HorizontalAlignment="Left" Height="277" Margin="371,64,0,0" VerticalAlignment="Top" Width="400.000" Loaded="ListView_Loaded">
+        <ListView x:Name="contactListView" HorizontalAlignment="Left" Height="248" Margin="508,118,0,0" VerticalAlignment="Top" Width="496" Loaded="ListView_Loaded">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Jmeno" DisplayMemberBinding="{Binding fName}" Width="70"/>
-                    <GridViewColumn Header="Prijemni" DisplayMemberBinding="{Binding lName}" Width="70"/>
-                    <GridViewColumn Header="Pozice" DisplayMemberBinding="{Binding function}" Width="70"/>
-                    <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding phone}" Width="90"/>
-                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding email}" Width="90"/>
+                    <GridViewColumn Header="Jmeno" DisplayMemberBinding="{Binding fName}" Width="85"/>
+                    <GridViewColumn Header="Prijemni" DisplayMemberBinding="{Binding lName}" Width="85"/>
+                    <GridViewColumn Header="Pozice" DisplayMemberBinding="{Binding function}" Width="80"/>
+                    <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding phone}" Width="100"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding email}" Width="140"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Label Content="Kontakty" HorizontalAlignment="Left" Margin="513,84,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" FontSize="14"/>
+        <Button x:Name="backButton" Content="Zpet" HorizontalAlignment="Left" Height="41" Margin="785,638,0,0" VerticalAlignment="Top" Width="173" Click="backButtonClick"/>
+        <Label x:Name="detailHeader" Content="Detail kapely" HorizontalAlignment="Left" Margin="364,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.833,-0.378" Width="475" Loaded="detailLoaded" FontWeight="ExtraBold" FontSize="18" MaxWidth="800" TextOptions.TextHintingMode="Animated"/>
+        <RichTextBox x:Name="personalNote" HorizontalAlignment="Left" Height="159" Margin="508,439,0,0" VerticalAlignment="Top" Width="496" Loaded="noteLoaded">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Poznamka" HorizontalAlignment="Left" Margin="513,413,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Button x:Name="updateBandButton" HorizontalAlignment="Left" Margin="578,638,0,0" VerticalAlignment="Top" Width="167" Height="41" Click="saveBandButtonClick" Content="save"/>
     </Grid>
 </Page>

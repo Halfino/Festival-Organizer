@@ -35,6 +35,7 @@ namespace EvickaWPF
             band.facebook = facebook.Text;
             band.banzone = bandzone.Text;
             band.website = website.Text;
+            band.personalNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
 
             band.saveBandToDb(band);
 
