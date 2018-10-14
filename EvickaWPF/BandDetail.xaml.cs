@@ -120,7 +120,8 @@ namespace EvickaWPF
                     {
                         var contacts = db.GetCollection<BandContact>("BandContacts");
                         MessageBoxResult myResult;
-                        myResult = MessageBox.Show("Opravdu chcete smazat kontakt " + contactToDelete.fName +" " + contactToDelete.lName + " ?", "Delete Confirmation", MessageBoxButton.OKCancel);
+                        myResult = MessageBox.Show("Opravdu chcete smazat kontakt " + contactToDelete.fName +" " + 
+                            contactToDelete.lName + " ?", "Delete Confirmation", MessageBoxButton.OKCancel);
                         if (myResult == MessageBoxResult.OK)
                         {
                             contacts.Delete(contactToDelete._id);
