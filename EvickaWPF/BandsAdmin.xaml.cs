@@ -16,6 +16,18 @@ using System.ComponentModel;
 using System.Collections;
 using System.Drawing;
 using LiteDB;
+using iText.IO.Font;
+using iText.IO.Font.Constants;
+using iText.IO.Image;
+using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using Table = iText.Layout.Element.Table;
+using iText.Layout.Properties;
+using iText.IO.Util;
+using System.Windows.Markup;
 
 namespace EvickaWPF
 {
@@ -127,6 +139,79 @@ namespace EvickaWPF
         private void exitButtonClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Export data tables to PDF.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exportPDF(object sender, RoutedEventArgs e)
+        {
+            //prepare PDF document
+            PdfWriter writer = new PdfWriter("testPDFs/testPDF.pdf");
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf, PageSize.A4.Rotate());
+            document.SetMargins(20, 20, 20, 20);
+            PdfFont font = PdfFontFactory.CreateFont(FontConstants.HELVETICA);
+            PdfFont bold = PdfFontFactory.CreateFont(FontConstants.HELVETICA_BOLD);
+
+            //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
+            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1, 1 });
+            //table width related to page
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            string line;
+            List<string> lines = new List<string>();
+            using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
+            {
+                // prepare data to strings for PDF creating
+                var bands = db.GetCollection<Band>("Bands");
+                var queryBands = bands.FindAll();
+                var sortedBands = queryBands.OrderBy(x => x.name);
+                foreach (var band in sortedBands)
+                {
+                    Band bandToProcess = (Band)band;
+                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", band.name, band.city, band.style, band.facebook, band.banzone, band.website, band.members, band.description);
+                    lines.Add(line);
+                }
+            }
+            string headerLine = "Jméno, Město, Žánr, Facebook, Bandzone, Website, Složení, Popis";
+            //process headerLine
+            process(table, headerLine, bold, true);
+            //process data rows into table
+            foreach (String tableLine in lines)
+            {
+                process(table, tableLine, font, false);
+            }
+
+            document.Add(table);
+            document.Close();
+        }
+
+        /// <summary>
+        /// Process table row for PDF export
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="line"></param>
+        /// <param name="font"></param>
+        /// <param name="isHeader"></param>
+        private void process(Table table, String line, PdfFont font, Boolean isHeader)
+        {
+            StringTokenizer tokenizer = new StringTokenizer(line, ",");
+
+            while (tokenizer.HasMoreTokens())
+            {
+                if (isHeader)
+                {
+                    table.AddHeaderCell(new Cell().Add(new iText.Layout.Element.Paragraph(tokenizer.NextToken()).SetFont(font)));
+                }
+                else
+                {
+                    table.AddCell(new Cell().Add(new iText.Layout.Element.Paragraph(tokenizer.NextToken()).SetFont(font)));
+                }
+
+            }
         }
     }
     
