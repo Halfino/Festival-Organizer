@@ -63,8 +63,22 @@ namespace EvickaWPF
 
         private void focusOn(object sender, RoutedEventArgs e)
         {
-  
-            newBandName.Text = "";
+            contactName.Text = "";
+        }
+
+        private void focusOnSurname(object sender, RoutedEventArgs e)
+        {
+            ContactSurname.Text = "";
+        }
+
+        private void focusOnFunction(object sender, RoutedEventArgs e)
+        {
+            contactFunction.Text = "";
+        }
+
+        private void focusOnPhone(object sender, RoutedEventArgs e)
+        {
+            contactPhone.Text = "";
         }
     }
 }

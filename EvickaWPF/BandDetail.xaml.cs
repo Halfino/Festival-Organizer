@@ -104,9 +104,48 @@ namespace EvickaWPF
             bandMembers.Document.Blocks.Add(new Paragraph(new Run(bandDetail.members)));
             bandDescription.Document.Blocks.Clear();
             bandDescription.Document.Blocks.Add(new Paragraph(new Run(bandDetail.description)));
-            bandFacebook.Text = bandDetail.facebook;
-            bandBandzone.Text = (bandDetail.banzone != null) ? bandDetail.banzone : "Kapela nema Bandzone";
-            bandWeb.Text = (bandDetail.website != null) ? bandDetail.website : "Kapela nema webovou stranku";
+            bandFacebook.Text = (bandDetail.facebook != null) ? bandDetail.facebook : "Kapela nemá Facebook" ;
+            bandBandzone.Text = (bandDetail.banzone != null) ? bandDetail.banzone : "Kapela nemá Bandzone";
+            bandWeb.Text = (bandDetail.website != null) ? bandDetail.website : "Kapela nemá webovou stránku";
+        }
+
+        private void deleteContactButtonClick(object sender, RoutedEventArgs e)
+        {
+            BandContact contactToDelete = (BandContact) contactListView.SelectedItem;
+            if (contactToDelete != null)
+            {
+                try
+                {
+                    using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
+                    {
+                        var contacts = db.GetCollection<BandContact>("BandContacts");
+                        MessageBoxResult myResult;
+                        myResult = MessageBox.Show("Opravdu chcete smazat kontakt " + contactToDelete.fName +" " + contactToDelete.lName + " ?", "Delete Confirmation", MessageBoxButton.OKCancel);
+                        if (myResult == MessageBoxResult.OK)
+                        {
+                            contacts.Delete(contactToDelete._id);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Není vybrán kontakt!");
+            }
+
+            this.NavigationService.Navigate(new BandDetail(bandDetail));
+
+        }
+
+        private void addContactButtonClick(object sender, RoutedEventArgs e)
+        {
+            int bandId = bandDetail._id;
+            this.NavigationService.Navigate(new AddContact(bandId));
+            
         }
     }
 }

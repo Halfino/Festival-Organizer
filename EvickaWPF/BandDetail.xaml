@@ -9,7 +9,7 @@
       Title="BandDetail">
 
     <Grid Background="White" Loaded="detailPageLoaded">
-        <ListView x:Name="contactListView" HorizontalAlignment="Left" Height="248" Margin="508,118,0,0" VerticalAlignment="Top" Width="496" Loaded="ListView_Loaded">
+        <ListView x:Name="contactListView" HorizontalAlignment="Left" Height="248" Margin="364,113,0,0" VerticalAlignment="Top" Width="496" Loaded="ListView_Loaded">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Jméno" DisplayMemberBinding="{Binding fName}" Width="85"/>
@@ -20,9 +20,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Kontakty" HorizontalAlignment="Left" Margin="513,84,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Kontakty" HorizontalAlignment="Left" Margin="390,84,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" FontSize="14"/>
         <Label x:Name="detailHeader" Content="Detail kapely" HorizontalAlignment="Left" Margin="364,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.833,-0.378" Width="475" Loaded="detailLoaded" FontWeight="ExtraBold" FontSize="18" MaxWidth="800" TextOptions.TextHintingMode="Animated"/>
-        <Label Content="Poznámka" HorizontalAlignment="Left" Margin="513,413,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Poznámky" HorizontalAlignment="Left" Margin="390,413,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" RenderTransformOrigin="-1.519,0.32"/>
         <TextBox x:Name="bandName" HorizontalAlignment="Left" Height="23" Margin="63,118,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
         <TextBox x:Name="bandCity" HorizontalAlignment="Left" Height="23" Margin="63,162,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
         <TextBox x:Name="bandStyle" HorizontalAlignment="Left" Height="23" Margin="63,211,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="196"/>
@@ -43,7 +43,7 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <RichTextBox x:Name="personalNote" HorizontalAlignment="Left" Height="159" Margin="508,439,0,0" VerticalAlignment="Top" Width="496" Loaded="noteLoaded">
+        <RichTextBox x:Name="personalNote" HorizontalAlignment="Left" Height="159" Margin="364,447,0,0" VerticalAlignment="Top" Width="496" Loaded="noteLoaded">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="Vlastní poznámka"/>
@@ -52,5 +52,7 @@
         </RichTextBox>
         <Button x:Name="updateBandButton" HorizontalAlignment="Left" Margin="578,638,0,0" VerticalAlignment="Top" Width="167" Height="41" Click="saveBandButtonClick" Content="Uložit změny"/>
         <Button x:Name="backButton" Content="Zpet" HorizontalAlignment="Left" Height="41" Margin="785,638,0,0" VerticalAlignment="Top" Width="173" Click="backButtonClick"/>
+        <Button x:Name="deleteContactButton" Content="Smazat Kontakt" HorizontalAlignment="Left" Margin="889,122,0,0" VerticalAlignment="Top" Width="100" Height="28" Click="deleteContactButtonClick"/>
+        <Button x:Name="addContactButton" Content="Přidat Kontakt" HorizontalAlignment="Left" Margin="889,166,0,0" VerticalAlignment="Top" Width="100" Height="28" Click="addContactButtonClick"/>
     </Grid>
 </Page>

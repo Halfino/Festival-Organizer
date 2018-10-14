@@ -9,42 +9,47 @@
       Title="NewBand">
 
     <Grid Background="White">
-        <TextBox x:Name="newBandName" HorizontalAlignment="Left" Height="25" Margin="142,66,0,0" TextWrapping="Wrap" Text="Nazev kapely" VerticalAlignment="Top" Width="218" GotFocus="focusOn"/>
-        <TextBox x:Name="newBandCity" HorizontalAlignment="Left" Height="25" Margin="143,106,0,0" TextWrapping="Wrap" Text="Mesto" VerticalAlignment="Top" Width="218"/>
-        <TextBox x:Name="newBandStyle" HorizontalAlignment="Left" Height="22" Margin="143,153,0,0" TextWrapping="Wrap" Text="Styl" VerticalAlignment="Top" Width="218"/>
-        <Button x:Name="saveBandButton" Content="Ulozit" HorizontalAlignment="Left" Height="27" Margin="704,425,0,0" VerticalAlignment="Top" Width="144" Click="newBand"/>
-        <RichTextBox x:Name="bandDescription" HorizontalAlignment="Left" Height="106" Margin="143,205,0,0" VerticalAlignment="Top" Width="217">
+        <TextBox x:Name="newBandName" HorizontalAlignment="Left" Height="25" Margin="143,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" GotFocus="focusOn"/>
+        <TextBox x:Name="newBandCity" HorizontalAlignment="Left" Height="25" Margin="143,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
+        <TextBox x:Name="newBandStyle" HorizontalAlignment="Left" Height="22" Margin="144,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
+        <Button x:Name="saveBandButton" Content="Ulozit" HorizontalAlignment="Left" Height="27" Margin="746,406,0,0" VerticalAlignment="Top" Width="144" Click="newBand"/>
+        <RichTextBox x:Name="bandDescription" HorizontalAlignment="Left" Height="106" Margin="144,229,0,0" VerticalAlignment="Top" Width="217">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Popis"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <TextBox x:Name="facebook" HorizontalAlignment="Left" Height="23" Margin="143,338,0,0" TextWrapping="Wrap" Text="Facebook" VerticalAlignment="Top" Width="217"/>
-        <TextBox x:Name="bandzone" HorizontalAlignment="Left" Height="23" Margin="143,396,0,0" TextWrapping="Wrap" Text="Banzone" VerticalAlignment="Top" Width="217"/>
-        <TextBox x:Name="website" HorizontalAlignment="Left" Height="23" Margin="143,451,0,0" TextWrapping="Wrap" Text="Website" VerticalAlignment="Top" Width="217"/>
-        <TextBox x:Name="contactName" HorizontalAlignment="Left" Height="25" Margin="692,106,0,0" TextWrapping="Wrap" Text="Jmeno" VerticalAlignment="Top" Width="218"/>
-        <TextBox x:Name="ContactSurname" HorizontalAlignment="Left" Height="25" Margin="692,150,0,0" TextWrapping="Wrap" Text="Prijmeni" VerticalAlignment="Top" Width="218"/>
-        <TextBox x:Name="contactFunction" HorizontalAlignment="Left" Height="25" Margin="692,191,0,0" TextWrapping="Wrap" Text="Funkce" VerticalAlignment="Top" Width="218"/>
-        <TextBox x:Name="contactPhone" HorizontalAlignment="Left" Height="25" Margin="692,243,0,0" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Top" Width="218"/>
+        <TextBox x:Name="facebook" HorizontalAlignment="Left" Height="23" Margin="144,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="bandzone" HorizontalAlignment="Left" Height="23" Margin="144,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="website" HorizontalAlignment="Left" Height="23" Margin="144,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <TextBox x:Name="contactName" HorizontalAlignment="Left" Height="25" Margin="692,106,0,0" TextWrapping="Wrap" Text="Jmeno" VerticalAlignment="Top" Width="218" GotFocus="focusOn"/>
+        <TextBox x:Name="ContactSurname" HorizontalAlignment="Left" Height="25" Margin="692,150,0,0" TextWrapping="Wrap" Text="Prijmeni" VerticalAlignment="Top" Width="218" GotFocus="focusOnSurname"/>
+        <TextBox x:Name="contactFunction" HorizontalAlignment="Left" Height="25" Margin="692,191,0,0" TextWrapping="Wrap" Text="Funkce" VerticalAlignment="Top" Width="218" GotFocus="focusOnFunction"/>
+        <TextBox x:Name="contactPhone" HorizontalAlignment="Left" Height="25" Margin="692,243,0,0" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Top" Width="218" GotFocus="focusOnPhone"/>
         <TextBox x:Name="contactEmail" HorizontalAlignment="Left" Height="25" Margin="692,286,0,0" TextWrapping="Wrap" Text="@" VerticalAlignment="Top" Width="218"/>
         <Label Content="Kontakt:" HorizontalAlignment="Left" Margin="692,73,0,0" VerticalAlignment="Top" Width="121" FontWeight="Bold"/>
-        <Button x:Name="homeButton" Content="Zpet" HorizontalAlignment="Left" Margin="704,492,0,0" VerticalAlignment="Top" Width="144" Height="29" Click="back"/>
-        <RichTextBox x:Name="personalNote" HorizontalAlignment="Left" Height="96" Margin="139,507,0,0" VerticalAlignment="Top" Width="221">
+        <Button x:Name="homeButton" Content="Zpet" HorizontalAlignment="Left" Margin="746,491,0,0" VerticalAlignment="Top" Width="144" Height="29" Click="back"/>
+        <RichTextBox x:Name="personalNote" HorizontalAlignment="Left" Height="321" Margin="409,321,0,0" VerticalAlignment="Top" Width="272">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="Osobni poznamka"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Label Content="Nova kapela" Margin="500,29,0,0" VerticalAlignment="Top" Width="115" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18"/>
-        <RichTextBox x:Name="bandMembers" HorizontalAlignment="Left" Height="106" Margin="419,205,0,0" VerticalAlignment="Top" Width="217">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="Slozeni"/>
-                </Paragraph>
-            </FlowDocument>
+        <Label Content="Nová kapela" Margin="500,29,0,0" VerticalAlignment="Top" Width="115" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18"/>
+        <RichTextBox x:Name="bandMembers" HorizontalAlignment="Left" Height="106" Margin="144,536,0,0" VerticalAlignment="Top" Width="217">
+            <FlowDocument/>
         </RichTextBox>
+        <Label Content="Název Kapely" HorizontalAlignment="Left" Margin="92,59,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Město" HorizontalAlignment="Left" Margin="92,118,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Žánr" HorizontalAlignment="Left" Margin="92,155,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Popis" HorizontalAlignment="Left" Margin="92,211,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold" RenderTransformOrigin="0.853,0.577"/>
+        <Label Content="Facebook" HorizontalAlignment="Left" Margin="83,352,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Bandzone" HorizontalAlignment="Left" Margin="83,399,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Webová stránka" HorizontalAlignment="Left" Margin="83,453,0,0" VerticalAlignment="Top" Width="109" FontWeight="Bold"/>
+        <Label Content="Složení kapely" HorizontalAlignment="Left" Margin="83,510,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold"/>
+        <Label Content="Osobní poznámky" HorizontalAlignment="Left" Margin="409,286,0,0" VerticalAlignment="Top" Width="123" FontWeight="Bold"/>
 
 
     </Grid>

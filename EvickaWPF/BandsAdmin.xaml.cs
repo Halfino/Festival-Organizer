@@ -88,7 +88,7 @@ namespace EvickaWPF
         }
 
         /// <summary>
-        /// Mazani kapely, nice to have potvrzeni pred smazanim.
+        /// Mazani kapely.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -26,7 +26,7 @@ namespace EvickaWPF
                 using (var db = new LiteDatabase(@"EvaDB.db"))
                 {
                     var contacts = db.GetCollection<BandContact>("BandContacts");
-                    contacts.Insert(contact);
+                    contacts.Upsert(contact);
                 }
             }
             catch (Exception ex)

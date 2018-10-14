@@ -1,0 +1,21 @@
+﻿<Page x:Class="EvickaWPF.AddContact"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EvickaWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1024"
+      Title="AddContact">
+
+    <Grid Background="White">
+        <Label x:Name="detailHeader" Content="Detail kapely" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.833,-0.378" Width="475" Loaded="detailLoaded" FontWeight="ExtraBold" FontSize="18" MaxWidth="800" TextOptions.TextHintingMode="Animated"/>
+        <TextBox x:Name="contactName" HorizontalAlignment="Center" Height="25" Margin="0,100,0,0" TextWrapping="Wrap" Text="Jmeno" VerticalAlignment="Top" Width="218" GotFocus="focusOn"/>
+        <TextBox x:Name="ContactSurname" HorizontalAlignment="Center" Height="25" Margin="0,150,0,0" TextWrapping="Wrap" Text="Prijmeni" VerticalAlignment="Top" Width="218" GotFocus="focusOnSurname"/>
+        <TextBox x:Name="contactFunction" HorizontalAlignment="Center" Height="25" Margin="0,200,0,0" TextWrapping="Wrap" Text="Funkce" VerticalAlignment="Top" Width="218" GotFocus="focusOnFunction"/>
+        <TextBox x:Name="contactPhone" HorizontalAlignment="Center" Height="25" Margin="0,250,0,0" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Top" Width="218" GotFocus="focusOnPhone"/>
+        <TextBox x:Name="contactEmail" HorizontalAlignment="Center" Height="25" Margin="0,300,0,0" TextWrapping="Wrap" Text="@" VerticalAlignment="Top" Width="218"/>
+        <Button x:Name="saveContactButton" Content="Ulozit" HorizontalAlignment="Center" Height="27" Margin="0,438,0,0" VerticalAlignment="Top" Width="144" Click="newContact"/>
+        <Button x:Name="homeButton" Content="Zpet" HorizontalAlignment="Center" Margin="0,512,0,0" VerticalAlignment="Top" Width="144" Height="29" Click="back"/>
+    </Grid>
+</Page>
