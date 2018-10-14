@@ -245,6 +245,58 @@ namespace EvickaWPF
 
                 }
             }
+
+        private void pdfExportSearchedClick(object sender, RoutedEventArgs e)
+        {
+            //prepare PDF document
+            PdfWriter writer = new PdfWriter("testPDFs/VyhledaneKapely.pdf");
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf, PageSize.A4.Rotate());
+            document.SetMargins(20, 20, 20, 20);
+            PdfFont font = PdfFontFactory.CreateFont(FontConstants.HELVETICA);
+            PdfFont bold = PdfFontFactory.CreateFont(FontConstants.HELVETICA_BOLD);
+
+            //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
+            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1, 1 });
+            //table width related to page
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            string line;
+            List<string> lines = new List<string>();
+            using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
+            {
+                // prepare data to strings for PDF creating
+                //var bands = db.GetCollection<Band>("Bands");
+                //var queryBands = bands.FindAll();
+                var queryBands = bandListView.ItemsSource;
+                //var sortedBands = queryBands.OrderBy(x => x.name);
+                foreach (var band in queryBands)
+                {
+                    Band bandToProcess = (Band)band;
+                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                        bandToProcess.name,
+                        bandToProcess.city,
+                        bandToProcess.style,
+                        bandToProcess.facebook,
+                        bandToProcess.banzone,
+                        bandToProcess.website,
+                        bandToProcess.members,
+                        bandToProcess.description);
+                    lines.Add(line);
+                }
+            }
+            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Složení, Popis";
+            //process headerLine
+            process(table, headerLine, bold, true);
+            //process data rows into table
+            foreach (String tableLine in lines)
+            {
+                process(table, tableLine, font, false);
+            }
+
+            document.Add(table);
+            document.Close();
         }
+    }
 
     }
