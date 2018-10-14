@@ -77,7 +77,7 @@ namespace EvickaWPF
 
             if(band == null)
             {
-                MessageBox.Show("Nevybral jsi kapelu na detial");
+                MessageBox.Show("Není vybrána kapela!");
                 this.NavigationService.Navigate(new BandsAdmin());
             }
             else
@@ -118,7 +118,7 @@ namespace EvickaWPF
             }
             else
             {
-                MessageBox.Show("Nevybral jsi kapelu ke smazani");
+                MessageBox.Show("Není vybrána kapela!");
             }
 
             this.NavigationService.Navigate(new BandsAdmin());

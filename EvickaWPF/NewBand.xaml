@@ -9,7 +9,7 @@
       Title="NewBand">
 
     <Grid Background="White">
-        <TextBox x:Name="newBandName" HorizontalAlignment="Left" Height="25" Margin="142,66,0,0" TextWrapping="Wrap" Text="Nazev kapely" VerticalAlignment="Top" Width="218"/>
+        <TextBox x:Name="newBandName" HorizontalAlignment="Left" Height="25" Margin="142,66,0,0" TextWrapping="Wrap" Text="Nazev kapely" VerticalAlignment="Top" Width="218" GotFocus="focusOn"/>
         <TextBox x:Name="newBandCity" HorizontalAlignment="Left" Height="25" Margin="143,106,0,0" TextWrapping="Wrap" Text="Mesto" VerticalAlignment="Top" Width="218"/>
         <TextBox x:Name="newBandStyle" HorizontalAlignment="Left" Height="22" Margin="143,153,0,0" TextWrapping="Wrap" Text="Styl" VerticalAlignment="Top" Width="218"/>
         <Button x:Name="saveBandButton" Content="Ulozit" HorizontalAlignment="Left" Height="27" Margin="704,425,0,0" VerticalAlignment="Top" Width="144" Click="newBand"/>

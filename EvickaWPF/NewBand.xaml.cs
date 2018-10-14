@@ -58,7 +58,13 @@ namespace EvickaWPF
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new mainPage());
+            this.NavigationService.Navigate(new BandsAdmin());
+        }
+
+        private void focusOn(object sender, RoutedEventArgs e)
+        {
+  
+            newBandName.Text = "";
         }
     }
 }
