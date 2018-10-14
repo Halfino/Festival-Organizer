@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EvickaWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024">
+        Title="Organizér Festivalů" Height="768" Width="1024" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Frame x:Name="myFrame" Content="Frame" NavigationUIVisibility="Hidden"/>
 

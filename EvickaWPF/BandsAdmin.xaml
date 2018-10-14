@@ -9,7 +9,7 @@
       Title="BandsAdmin">
 
     <Grid Background="White">
-        <ListView x:Name="bandListView" HorizontalAlignment="Left" Height="591" Margin="82,35,0,0" VerticalAlignment="Top" Width="363" Initialized="bandListInitialize">
+        <ListView x:Name="bandListView" HorizontalAlignment="Left" Height="591" Margin="82,52,0,0" VerticalAlignment="Top" Width="363" Initialized="bandListInitialize">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Jméno" DisplayMemberBinding="{Binding name}" Width="160"/>
@@ -23,7 +23,7 @@
         <Button x:Name="deleteBandButton" Content="Smazat kapelu" HorizontalAlignment="Left" Height="27" Margin="652,185,0,0" VerticalAlignment="Top" Width="193" Click="deleteBandButton_Click"/>
         <Button x:Name="ExitButton" Content="Konec Programu" HorizontalAlignment="Left" Margin="652,471,0,0" VerticalAlignment="Top" Width="192" Height="38" Click="exitButtonClick"/>
         <Button x:Name="ExportButton" Content="PDF Export All" HorizontalAlignment="Left" Margin="652,245,0,0" VerticalAlignment="Top" Width="193" Height="37" Click="exportPDF"/>
-        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="23" Margin="82,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="textChanged"/>
+        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="22" Margin="82,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163" TextChanged="textChanged"/>
 
     </Grid>
 </Page>
