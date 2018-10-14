@@ -37,7 +37,7 @@ namespace EvickaWPF
 
             try
             {
-                using (var db = new LiteDatabase(@"EvaDB.db"))
+                using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
                 {
                     var bands = db.GetCollection<Band>("Bands");
                     var queryBands = bands.FindAll();
@@ -97,7 +97,7 @@ namespace EvickaWPF
             {
                 try
                 {
-                    using (var db = new LiteDatabase(@"EvaDB.db"))
+                    using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
                     {
                         var bands = db.GetCollection<Band>("Bands");
                         bands.Delete(band._id);

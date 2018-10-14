@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LiteDB;
+using System.Configuration;
 
 namespace EvickaWPF
 {
@@ -29,7 +30,7 @@ namespace EvickaWPF
         {
             try
             {
-                using (var db = new LiteDatabase(@"EvaDB.db"))
+                using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
                 {
                     var bands = db.GetCollection<Band>("Bands");
                     bands.Upsert(band);

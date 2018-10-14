@@ -36,7 +36,7 @@ namespace EvickaWPF
         {
             try
             {
-                using (var db = new LiteDatabase(@"EvaDB.db"))
+                using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
                 {
                     var bands = db.GetCollection<Band>("Bands");
                     var contacts = db.GetCollection<BandContact>("BandContacts");
@@ -66,11 +66,11 @@ namespace EvickaWPF
         {
             try
             {
-                    string personalBandNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
-                    bandDetail.name = "tak to zkusime";
-                    bandDetail.personalNote = personalBandNote;
-                    bandDetail.saveBandToDb(bandDetail);
-                    this.NavigationService.Navigate(new BandDetail(bandDetail));                
+                string personalBandNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
+                bandDetail.name = "tak to zkusime";
+                bandDetail.personalNote = personalBandNote;
+                bandDetail.saveBandToDb(bandDetail);
+                this.NavigationService.Navigate(new BandDetail(bandDetail));                
             }
             catch(Exception ex)
             {
