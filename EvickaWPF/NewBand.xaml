@@ -15,7 +15,7 @@
         <RichTextBox x:Name="bandDescription" HorizontalAlignment="Left" Height="106" Margin="144,229,0,0" VerticalAlignment="Top" Width="217">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text=""/>
+                    <Run Text="Nevyplneno"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -29,7 +29,7 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <TextBox x:Name="contactName" HorizontalAlignment="Left" Height="25" Margin="692,106,0,0" TextWrapping="Wrap" Text="Jmeno" VerticalAlignment="Top" Width="218" GotFocus="focusOn"/>
+        <TextBox x:Name="contactName" HorizontalAlignment="Left" Height="25" Margin="692,106,0,0" TextWrapping="Wrap" Text="Jmeno" VerticalAlignment="Top" Width="218" GotFocus="focusOnContactName"/>
         <TextBox x:Name="ContactSurname" HorizontalAlignment="Left" Height="25" Margin="692,150,0,0" TextWrapping="Wrap" Text="Prijmeni" VerticalAlignment="Top" Width="218" GotFocus="focusOnSurname"/>
         <TextBox x:Name="contactFunction" HorizontalAlignment="Left" Height="25" Margin="692,191,0,0" TextWrapping="Wrap" Text="Funkce" VerticalAlignment="Top" Width="218" GotFocus="focusOnFunction"/>
         <TextBox x:Name="contactPhone" HorizontalAlignment="Left" Height="25" Margin="692,243,0,0" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Top" Width="218" GotFocus="focusOnPhone"/>

@@ -22,12 +22,17 @@ using iText.IO.Image;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Action;
+using iText.Kernel.Pdf.Navigation;
 using iText.Layout;
 using iText.Layout.Element;
 using Table = iText.Layout.Element.Table;
 using iText.Layout.Properties;
 using iText.IO.Util;
 using System.Windows.Markup;
+using System.Xml.Linq;
+using Organizer;
+
 
 namespace EvickaWPF
 {
@@ -114,18 +119,28 @@ namespace EvickaWPF
                 {
                     using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
                     {
-                        var bands = db.GetCollection<Band>("Bands");
                         MessageBoxResult myResult;
                         myResult = MessageBox.Show("Opravdu chcete smazat kapelu " + band.name + " ?", "Delete Confirmation", MessageBoxButton.OKCancel);
                         if (myResult == MessageBoxResult.OK)
                         {
+                            var bands = db.GetCollection<Band>("Bands");
+                            var contacts = db.GetCollection<BandContact>("BandContacts");
+                            List<BandContact> contactsQuery = contacts.FindAll().ToList();
+                            List<BandContact> contactsToDelete = contactsQuery.FindAll(delegate (BandContact bk)
+                            {
+                                return bk.bandId == band._id;
+                            });
+                            foreach (BandContact contact in contactsToDelete)
+                            {
+                                contacts.Delete(contact._id);
+                            }
                             bands.Delete(band._id);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -148,71 +163,23 @@ namespace EvickaWPF
         /// <param name="e"></param>
         private void exportPDF(object sender, RoutedEventArgs e)
         {
-            //prepare PDF document
-            PdfWriter writer = new PdfWriter("testPDFs/testPDF.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf, PageSize.A4.Rotate());
-            document.SetMargins(20, 20, 20, 20);
-            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-            PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            List<Band> bands;
+            ArrayList bandsToPdf = new ArrayList();
 
-            //set number of table columns and their width relative to each other (that works weird, changing values has no affection)
-            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1});
-            //table width related to page
-            table.SetWidth(UnitValue.CreatePercentValue(100));
-
-            string line;
-            List<string> lines = new List<string>();
             using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
             {
-                // prepare data to strings for PDF creating
-                var bands = db.GetCollection<Band>("Bands");
-                var queryBands = bands.FindAll();
-                var sortedBands = queryBands.OrderBy(x => x.name);
-                foreach (var band in sortedBands)
-                {
-                    Band bandToProcess = (Band)band;
-                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", band.name, band.city, band.style, band.facebook, band.banzone, band.website, band.description);
-                    lines.Add(line);
-                }
-            }
-            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Popis";
-            //process headerLine
-            process(table, headerLine, bold, true);
-            //process data rows into table
-            foreach (String tableLine in lines)
-            {
-                process(table, tableLine, font, false);
-            }
+                var dbBands = db.GetCollection<Band>("Bands");
+                bands = dbBands.FindAll().ToList();
 
-            document.Add(table);
-            document.Close();
-        }
-
-        /// <summary>
-        /// Process table row for PDF export
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="line"></param>
-        /// <param name="font"></param>
-        /// <param name="isHeader"></param>
-        private void process(Table table, String line, PdfFont font, Boolean isHeader)
-        {
-            StringTokenizer tokenizer = new StringTokenizer(line, ",");
-
-            while (tokenizer.HasMoreTokens())
-            {
-                if (isHeader)
-                {
-                    table.AddHeaderCell(new Cell().Add(new iText.Layout.Element.Paragraph(tokenizer.NextToken()).SetFont(font)));
-                }
-                else
-                {
-                    table.AddCell(new Cell().Add(new iText.Layout.Element.Paragraph(tokenizer.NextToken()).SetFont(font)));
+                foreach (Band bandToProcess in bands)
+                {                   
+                    bandsToPdf.Add(bandToProcess);               
                 }
 
+                PdfExport.processBandsToPdf(bandsToPdf, "testPDFs/testPDF.pdf", 12);
             }
         }
+
 
 
         private void textChanged(object sender, TextChangedEventArgs e)
@@ -238,7 +205,6 @@ namespace EvickaWPF
 
                 else
                 {
-
                     var allBandList = queryBands.OrderBy(x => x.name).ToList();
                     bandListView.ItemsSource = allBandList;
                 }
@@ -248,54 +214,15 @@ namespace EvickaWPF
 
         private void pdfExportSearchedClick(object sender, RoutedEventArgs e)
         {
-            //prepare PDF document
-            PdfWriter writer = new PdfWriter("testPDFs/VyhledaneKapely.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf, PageSize.A4.Rotate());
-            document.SetMargins(20, 20, 20, 20);
-            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-            PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-
-            //set number of table columns and their width relatiuve to each other (that works weird, changing values has no affection)
-            Table table = new Table(new float[] { 1, 1, 1, 1, 1, 1, 1 });
-            //table width related to page
-            table.SetWidth(UnitValue.CreatePercentValue(100));
-
-            string line;
-            List<string> lines = new List<string>();
-            using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
-            {
-                // prepare data to strings for PDF creating
-                //var bands = db.GetCollection<Band>("Bands");
-                //var queryBands = bands.FindAll();
+            ArrayList bandsToPdf = new ArrayList();
                 var queryBands = bandListView.ItemsSource;
                 //var sortedBands = queryBands.OrderBy(x => x.name);
                 foreach (var band in queryBands)
                 {
                     Band bandToProcess = (Band)band;
-                    line = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}",
-                        bandToProcess.name,
-                        bandToProcess.city,
-                        bandToProcess.style,
-                        bandToProcess.facebook,
-                        bandToProcess.banzone,
-                        bandToProcess.website,
-                        bandToProcess.description);
-                    lines.Add(line);
+                bandsToPdf.Add(band);
                 }
-            }
-            string headerLine = "Jméno, Mesto, Žánr, Facebook, Bandzone, Website, Popis";
-            //process headerLine
-            process(table, headerLine, bold, true);
-            //process data rows into table
-            foreach (String tableLine in lines)
-            {
-                process(table, tableLine, font, false);
-            }
-
-            document.Add(table);
-            document.Close();
+            PdfExport.processBandsToPdf(bandsToPdf, "testPDFs/selectedBands.pdf", 12);
         }
     }
-
-    }
+}

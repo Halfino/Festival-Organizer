@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,5 +36,28 @@ namespace EvickaWPF
             }
         }
 
+        public static ArrayList findBandContacts(Band band)
+        {
+            ArrayList contacts = new ArrayList();
+            using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
+            {
+                var dbContacts = db.GetCollection<BandContact>("BandContacts");
+                List<BandContact> contactsToReturn;
+                ArrayList bandContacts = new ArrayList();
+                List<BandContact> queryContacts = dbContacts.FindAll().ToList();
+
+                contactsToReturn = queryContacts.FindAll(delegate (BandContact bk)
+                {
+                    return bk.bandId == band._id;
+                });
+
+                foreach (BandContact contact in contactsToReturn)
+                {
+                    contacts.Add(contact);
+                }
+            }
+
+            return contacts;
+        }
     }
 }

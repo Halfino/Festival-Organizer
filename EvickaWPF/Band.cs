@@ -41,5 +41,28 @@ namespace EvickaWPF
                 System.Windows.MessageBox.Show(ex.Message);
             }
         }
+
+        public Boolean checkIfBandExists(Band band)
+        {
+            Boolean bandExists = false;
+            try
+            {
+                using (var db = new LiteDatabase(LiteDbConnection.getDbName()))
+                {
+                    var bands = db.GetCollection<Band>("Bands");
+                    var queryBands = bands.FindAll();
+
+                    if (bands.Find(lookingBand => lookingBand.name == band.name).Any())
+                    {
+                        bandExists = true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message);
+            }
+            return bandExists;
+        }
     }
 }

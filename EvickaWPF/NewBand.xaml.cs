@@ -29,30 +29,35 @@ namespace EvickaWPF
         {
             Band band = new Band();
             band.name = newBandName.Text;
-            band.city = newBandCity.Text;
-            band.style = newBandStyle.Text;
+            band.city = newBandCity.Text.Any() ? newBandCity.Text : "Nevyplneno";
             band.description = new TextRange(bandDescription.Document.ContentStart, bandDescription.Document.ContentEnd).Text;
             band.facebook = facebook.Text.Contains("facebook".ToUpper()) ? facebook.Text : "Kapela nemá Facebook" ;
             band.banzone = bandzone.Text.Contains("banzone".ToUpper()) ? bandzone.Text : "Kapela nemá Bandzone";
             band.website = website.Text.Contains("www.") ? website.Text : "Kapela nemá webovou stránku";
+            band.style = newBandStyle.Text.Any() ? newBandStyle.Text : "Nedefinován styl!";
             band.personalNote = new TextRange(personalNote.Document.ContentStart, personalNote.Document.ContentEnd).Text;
 
-            band.saveBandToDb(band);
-
-            if (contactName != null)
+            if (band.checkIfBandExists(band))
             {
-                BandContact contact = new BandContact();
-                contact.fName = contactName.Text;
-                contact.lName = ContactSurname.Text;
-                contact.function = contactFunction.Text;
-                contact.phone = contactPhone.Text;
-                contact.email = contactEmail.Text;
-                contact.bandId = band._id;
-
-                contact.saveContactToDb(contact);
+                MessageBox.Show("Kapela s tímto názvem již existuje!");
             }
+            else
+            {
+                band.saveBandToDb(band);
+                if (contactName.Text.Any() && contactName.Text != "Jmeno")
+                {
+                    BandContact contact = new BandContact();
+                    contact.fName = contactName.Text;
+                    contact.lName = ContactSurname.Text;
+                    contact.function = contactFunction.Text;
+                    contact.phone = contactPhone.Text;
+                    contact.email = contactEmail.Text;
+                    contact.bandId = band._id;
 
-            this.NavigationService.Navigate(new BandsAdmin());
+                    contact.saveContactToDb(contact);
+                }
+                this.NavigationService.Navigate(new BandsAdmin());
+            }
         }
 
         private void back(object sender, RoutedEventArgs e)
@@ -60,7 +65,7 @@ namespace EvickaWPF
             this.NavigationService.Navigate(new BandsAdmin());
         }
 
-        private void focusOn(object sender, RoutedEventArgs e)
+        private void focusOnContactName(object sender, RoutedEventArgs e)
         {
             contactName.Text = "";
         }
@@ -78,6 +83,11 @@ namespace EvickaWPF
         private void focusOnPhone(object sender, RoutedEventArgs e)
         {
             contactPhone.Text = "";
+        }
+
+        private void focusOn(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
