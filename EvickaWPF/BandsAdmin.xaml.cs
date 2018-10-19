@@ -163,9 +163,15 @@ namespace EvickaWPF
         /// <param name="e"></param>
         private void exportPDF(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.ShowDialog();
-            string path = dialog.FileName;
+
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.ShowDialog();
+                string path = dialog.FileName;
+
+
+
             List<Band> bands;
             ArrayList bandsToPdf = new ArrayList();
 
@@ -181,6 +187,12 @@ namespace EvickaWPF
 
                 PdfExport.processBandsToPdf(bandsToPdf, path, 12);
             }
+            }
+            catch(Exception ex)
+            {
+                this.NavigationService.Navigate(new BandsAdmin());          
+            }
+
         }
 
 
@@ -220,15 +232,23 @@ namespace EvickaWPF
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.ShowDialog();
             string path = dialog.FileName;
+
             ArrayList bandsToPdf = new ArrayList();
             var queryBands = bandListView.ItemsSource;
-            //var sortedBands = queryBands.OrderBy(x => x.name);
             foreach (var band in queryBands)
             {
                 Band bandToProcess = (Band)band;
                 bandsToPdf.Add(band);
             }
-            PdfExport.processBandsToPdf(bandsToPdf, path, 12);
+            try
+            {
+                PdfExport.processBandsToPdf(bandsToPdf, path, 12);
+            }
+            catch
+            {
+                this.NavigationService.Navigate(new BandsAdmin());
+            }
+           
         }
     }
 }
