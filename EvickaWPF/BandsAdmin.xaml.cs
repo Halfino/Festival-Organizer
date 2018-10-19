@@ -167,6 +167,7 @@ namespace EvickaWPF
             try
             {
                 SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "PDF(*.pdf)|*.pdf";
                 dialog.ShowDialog();
                 string path = dialog.FileName;
 
@@ -230,6 +231,7 @@ namespace EvickaWPF
         private void pdfExportSearchedClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "PDF(*.pdf)|*.pdf";
             dialog.ShowDialog();
             string path = dialog.FileName;
 
