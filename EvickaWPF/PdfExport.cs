@@ -25,12 +25,64 @@ namespace Organizer
     public  class PdfExport
     {
         /// <summary>
+        /// Process band collection to pdf
+        /// </summary>
+        /// <param name="bands"></param>
+        /// <param name="destination"></param>
+        /// <param name="fontSize"></param>
+        public static void processBandsToPdf(ArrayList bands, string destination, int fontSize)
+        {
+            PdfDocument pdf = createDocument(destination);
+            Document doc = preparePdfDocument(fontSize, pdf);
+            List<KeyValuePair<string, int>> toc = new List<KeyValuePair<string, int>>();
+            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            Paragraph p;
+            int counter = 0;
+            int iterator = 0;
+
+            foreach (Band band in bands)
+            {
+                ArrayList contacts = new ArrayList();
+                contacts = BandContact.findBandContacts(band);
+
+                p = new Paragraph(band.name);
+                p.SetKeepTogether(true);
+                string line = band.name;
+                string name = String.Format(band.name, counter++);
+                p.SetFont(bold).SetFontSize(12).SetKeepWithNext(true).SetDestination(name).SetTextAlignment(TextAlignment.CENTER);
+                doc.Add(p);
+                toc.Add(new KeyValuePair<string, int>(line, pdf.GetNumberOfPages()));
+
+                PdfExport.writeBandProperty(doc, "Mesto:", band.city);
+                PdfExport.writeBandProperty(doc, "Styl:", band.style);
+
+                p = new Paragraph("Slozeni a kontakty").SetFont(bold);
+                doc.Add(p);
+                PdfExport.processContactsToBandExport(doc, contacts);
+                PdfExport.writeBandProperty(doc, "Popis:", band.description);
+                PdfExport.writeBandProperty(doc, "Facebook:", band.facebook);
+                PdfExport.writeBandProperty(doc, "Bandzone", band.banzone);
+                PdfExport.writeBandProperty(doc, "Webová stránka:", band.website);
+
+                if (iterator < bands.Count - 1)
+                {
+                    doc.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+                }
+                iterator += 1;
+            }
+            PdfExport.processDocumentLinkedList(toc, doc);
+
+            doc.Close();
+        }
+
+        /// <summary>
         /// Process one band parameter, defined in method params and writes it into PDF file
         /// </summary>
         /// <param name="document"></param>
         /// <param name="nameOfProperty"></param>
         /// <param name="propertyValue"></param>
-        public static void writeBandProperty(Document document, string nameOfProperty, string propertyValue)
+        private static void writeBandProperty(Document document, string nameOfProperty, string propertyValue)
         {
             PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
@@ -46,7 +98,7 @@ namespace Organizer
         /// </summary>
         /// <param name="document"></param>
         /// <param name="contacts"></param>
-        public static void processContactsToBandExport(Document document, ArrayList contacts)
+        private static void processContactsToBandExport(Document document, ArrayList contacts)
         {
             PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
@@ -127,7 +179,7 @@ namespace Organizer
         /// <param name="fontSize"></param>
         /// <param name="pdf"></param>
         /// <returns></returns>
-        public static Document preparePdfDocument(int fontSize, PdfDocument pdf)
+        private static Document preparePdfDocument(int fontSize, PdfDocument pdf)
         {
             Document document = new Document(pdf, PageSize.A4);
             document.SetMargins(20, 20, 20, 20);
@@ -144,66 +196,14 @@ namespace Organizer
         /// </summary>
         /// <param name="destination"></param>
         /// <returns></returns>
-        public static PdfDocument createDocument(string destination)
+        private static PdfDocument createDocument(string destination)
         {
             PdfWriter writer = new PdfWriter(destination);
             PdfDocument pdf = new PdfDocument(writer);
 
             return pdf;
         }
-
-        /// <summary>
-        /// Process band collection to pdf
-        /// </summary>
-        /// <param name="bands"></param>
-        /// <param name="destination"></param>
-        /// <param name="fontSize"></param>
-        public static void processBandsToPdf(ArrayList bands, string destination, int fontSize)
-        {
-            PdfDocument pdf = createDocument(destination);
-            Document doc = preparePdfDocument(fontSize, pdf);
-            List<KeyValuePair<string, int>> toc = new List<KeyValuePair<string, int>>();
-            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-            PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            Paragraph p;
-            int counter = 0;
-            int iterator = 0;
-
-            foreach (Band band in bands)
-            {
-                ArrayList contacts = new ArrayList();
-                contacts = BandContact.findBandContacts(band);
-
-                p = new Paragraph(band.name);
-                p.SetKeepTogether(true);
-                string line = band.name;
-                string name = String.Format(band.name, counter++);
-                p.SetFont(bold).SetFontSize(12).SetKeepWithNext(true).SetDestination(name).SetTextAlignment(TextAlignment.CENTER);
-                doc.Add(p);
-                toc.Add(new KeyValuePair<string, int>(line, pdf.GetNumberOfPages()));
-
-                PdfExport.writeBandProperty(doc, "Mesto:", band.city);
-                PdfExport.writeBandProperty(doc, "Styl:", band.style);
-
-                p = new Paragraph("Slozeni a kontakty").SetFont(bold);
-                doc.Add(p);
-                PdfExport.processContactsToBandExport(doc, contacts);
-                PdfExport.writeBandProperty(doc, "Popis:", band.description);
-                PdfExport.writeBandProperty(doc, "Facebook:", band.facebook);
-                PdfExport.writeBandProperty(doc, "Bandzone", band.banzone);
-                PdfExport.writeBandProperty(doc, "Webová stránka:", band.website);
-
-                if (iterator < bands.Count - 1)
-                {
-                    doc.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
-                }
-                iterator += 1;
-            }
-            PdfExport.processDocumentLinkedList(toc, doc);
-           
-            doc.Close();
-        }
-         
+        
         /// <summary>
         /// process list as last page of creating PDF
         /// </summary>
