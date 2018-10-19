@@ -19,6 +19,7 @@ using iText.IO.Util;
 using EvickaWPF;
 using System.Collections;
 using iText.Kernel.Colors;
+using System.Text.RegularExpressions;
 
 namespace Organizer
 {
@@ -53,16 +54,23 @@ namespace Organizer
                 p.SetFont(bold).SetFontSize(12).SetKeepWithNext(true).SetDestination(name).SetTextAlignment(TextAlignment.CENTER);
                 doc.Add(p);
                 toc.Add(new KeyValuePair<string, int>(line, pdf.GetNumberOfPages()));
+                try
+                {
+                    PdfExport.writeBandProperty(doc, "Mesto:", band.city);
+                    PdfExport.writeBandProperty(doc, "Styl:", band.style);
 
-                PdfExport.writeBandProperty(doc, "Mesto:", band.city);
-                PdfExport.writeBandProperty(doc, "Styl:", band.style);
+                    p = new Paragraph("Slozeni a kontakty").SetFont(bold);
+                    doc.Add(p);
+                    PdfExport.processContactsToBandExport(doc, contacts);
+                    PdfExport.writeBandProperty(doc, "Popis:", band.description);
+                    PdfExport.writeBandProperty(doc, "Facebook:", band.facebook);
+                    PdfExport.writeBandProperty(doc, "Bandzone", band.banzone);
+                }
+                catch(Exception ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
 
-                p = new Paragraph("Slozeni a kontakty").SetFont(bold);
-                doc.Add(p);
-                PdfExport.processContactsToBandExport(doc, contacts);
-                PdfExport.writeBandProperty(doc, "Popis:", band.description);
-                PdfExport.writeBandProperty(doc, "Facebook:", band.facebook);
-                PdfExport.writeBandProperty(doc, "Bandzone", band.banzone);
                 PdfExport.writeBandProperty(doc, "Webová stránka:", band.website);
 
                 if (iterator < bands.Count - 1)
@@ -121,7 +129,8 @@ namespace Organizer
                     string phone;
                     string email;
 
-                    if (contact.phone.Count() > 1)
+                    if (Regex.IsMatch(contact.phone, @"^(\d{9}|\+\d{12})$"))
+                       
                     {
                         phone = contact.phone;
                     }
