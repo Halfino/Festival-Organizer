@@ -32,7 +32,7 @@ using iText.IO.Util;
 using System.Windows.Markup;
 using System.Xml.Linq;
 using Organizer;
-
+using Microsoft.Win32;
 
 namespace EvickaWPF
 {
@@ -163,6 +163,9 @@ namespace EvickaWPF
         /// <param name="e"></param>
         private void exportPDF(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.ShowDialog();
+            string path = dialog.FileName;
             List<Band> bands;
             ArrayList bandsToPdf = new ArrayList();
 
@@ -172,11 +175,11 @@ namespace EvickaWPF
                 bands = dbBands.FindAll().ToList();
 
                 foreach (Band bandToProcess in bands)
-                {                   
-                    bandsToPdf.Add(bandToProcess);               
+                {
+                    bandsToPdf.Add(bandToProcess);
                 }
 
-                PdfExport.processBandsToPdf(bandsToPdf, "testPDFs/testPDF.pdf", 12);
+                PdfExport.processBandsToPdf(bandsToPdf, path, 12);
             }
         }
 
@@ -214,15 +217,18 @@ namespace EvickaWPF
 
         private void pdfExportSearchedClick(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.ShowDialog();
+            string path = dialog.FileName;
             ArrayList bandsToPdf = new ArrayList();
-                var queryBands = bandListView.ItemsSource;
-                //var sortedBands = queryBands.OrderBy(x => x.name);
-                foreach (var band in queryBands)
-                {
-                    Band bandToProcess = (Band)band;
+            var queryBands = bandListView.ItemsSource;
+            //var sortedBands = queryBands.OrderBy(x => x.name);
+            foreach (var band in queryBands)
+            {
+                Band bandToProcess = (Band)band;
                 bandsToPdf.Add(band);
-                }
-            PdfExport.processBandsToPdf(bandsToPdf, "testPDFs/selectedBands.pdf", 12);
+            }
+            PdfExport.processBandsToPdf(bandsToPdf, path, 12);
         }
     }
 }
